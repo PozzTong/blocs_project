@@ -1,6 +1,5 @@
 part of 'expense_list_bloc.dart';
 
-
 enum ExpenseListStatus { initial, loading, success, failure }
 
 final class ExpenseListState extends Equatable {
@@ -14,6 +13,8 @@ final class ExpenseListState extends Equatable {
   final ExpenseListStatus status;
   final double totalExpenses;
   final Category filter;
+
+  Iterable<Expense?> get filteredExpenses => filter.applyAll(expenses);
 
   ExpenseListState copyWith({
     List<Expense?> Function()? expenses,
@@ -31,7 +32,7 @@ final class ExpenseListState extends Equatable {
   }
 
   factory ExpenseListState.initial() {
-    return const  ExpenseListState();
+    return const ExpenseListState();
   }
 
   @override

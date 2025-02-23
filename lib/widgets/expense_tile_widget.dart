@@ -1,5 +1,3 @@
-
-
 import 'package:bloc_project/extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,17 +35,33 @@ class ExpenseTileWidget extends StatelessWidget {
             .read<ExpenseListBloc>()
             .add(ExpenseListExpenseDeleted(expense: expense));
       },
-      child: ListTile(
-        onTap: () => context.showAddExpenseSheet(expense: expense),
-        leading: Icon(Icons.car_repair, color: colorScheme.surfaceTint),
-        title: Text(expense.title, style: textTheme.titleMedium),
-        subtitle: Text(
-          formattedDate,
-          style: textTheme.bodySmall?.copyWith(
-            color: colorScheme.onBackground.withOpacity(0.5),
+      child: Dismissible(
+        key: ValueKey(expense.id),
+        direction: DismissDirection.endToStart,
+        background: Container(
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.all(16),
+          color: colorScheme.error,
+          child: Icon(
+            Icons.delete,
+            color: colorScheme.onError,
           ),
         ),
-        trailing: Text('-$price', style: textTheme.titleLarge),
+        onDismissed: (direction) {
+          context.read<ExpenseListBloc>().add(ExpenseListExpenseDeleted(expense: expense));
+        },
+        child: ListTile(
+          onTap: () => context.showAddExpenseSheet(expense: expense),
+          leading: Icon(Icons.car_repair, color: colorScheme.surfaceTint),
+          title: Text(expense.title, style: textTheme.titleMedium),
+          subtitle: Text(
+            formattedDate,
+            style: textTheme.bodySmall?.copyWith(
+              color: colorScheme.onBackground.withOpacity(0.5),
+            ),
+          ),
+          trailing: Text('-$price', style: textTheme.titleLarge),
+        ),
       ),
     );
   }

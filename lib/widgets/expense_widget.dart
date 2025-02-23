@@ -16,7 +16,8 @@ class ExpensesWidget extends StatelessWidget {
           return const LoadingWidget(radius: 12, addPadding: true);
         }
 
-        final expenses = state.expenses.toList();
+        // final expenses = state.expenses.toList();
+        final expenses = state.filteredExpenses.toList();
 
         if (state.status == ExpenseListStatus.success && expenses.isEmpty) {
           return const EmptyListWidget();
