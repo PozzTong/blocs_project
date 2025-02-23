@@ -10,9 +10,8 @@ Future<void> main() async {
 
   final storage = LocalDataStorage(
     preferences: await SharedPreferences.getInstance(),
+  );
 
-    );
-
-    final expenseRepository =ExpenseRepository(storage: storage);
-  runApp( App(expenseRepository:expenseRepository));
+  final expenseRepository = ExpenseRepository(storage: storage);
+  runApp(App(expenseRepository: expenseRepository));
 }
