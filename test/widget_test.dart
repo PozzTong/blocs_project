@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+// ignore: unused_import
 import 'package:bloc_project/main.dart';
 
 void main() {
@@ -28,4 +29,11 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
 }
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
