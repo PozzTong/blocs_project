@@ -1,4 +1,6 @@
 import 'package:bloc_project/extensions/extensions.dart';
+import 'package:bloc_project/model/category.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -48,11 +50,13 @@ class ExpenseTileWidget extends StatelessWidget {
           ),
         ),
         onDismissed: (direction) {
-          context.read<ExpenseListBloc>().add(ExpenseListExpenseDeleted(expense: expense));
+          context
+              .read<ExpenseListBloc>()
+              .add(ExpenseListExpenseDeleted(expense: expense));
         },
         child: ListTile(
           onTap: () => context.showAddExpenseSheet(expense: expense),
-          leading: Icon(Icons.car_repair, color: colorScheme.surfaceTint),
+          leading: Icon(expense.category.icon, color: colorScheme.surfaceTint),
           title: Text(expense.title, style: textTheme.titleMedium),
           subtitle: Text(
             formattedDate,

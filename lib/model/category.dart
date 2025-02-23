@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'expense.dart';
 
 enum Category {
@@ -36,4 +38,13 @@ extension CategoryX on Category {
   Iterable<Expense?> applyAll(Iterable<Expense?> expenses) {
     return expenses.where(apply);
   }
+   IconData get icon => switch (this) {
+        Category.all => Icons.category,
+        Category.entertainment => Icons.movie,
+        Category.food => Icons.fastfood,
+        Category.grocery => Icons.shopping_cart,
+        Category.work => Icons.work,
+        Category.traveling => Icons.flight,
+        Category.other => Icons.help_outline,
+      };
 }
